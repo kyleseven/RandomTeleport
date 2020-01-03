@@ -35,3 +35,4 @@ In `config.yml`:
  ## Permissions
  - `randomteleport.teleport` allows the usage of the `/rtp` command.
  - `randomteleport.bypass` allows players to bypass the cooldown checks, allowing them to use the command again instantly.
+ - `randomteleport.reload` allows players to reload the plugin config.yml
