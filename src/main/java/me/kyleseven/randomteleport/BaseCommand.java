@@ -31,17 +31,6 @@ public class BaseCommand implements CommandExecutor {
                 //If player has passed cooldown check OR has bypass permission
                 if (CooldownManager.checkCooldown(player) || player.hasPermission("randomteleport.bypass")) {
 
-                /*
-                General Logical Flow:
-                - get player current location "locFrom"
-                - generate random numbers for x and z difference (between min_range and max_range)
-                - Add or subtract (based on rng) from players current location "locFrom"
-                - Find safe y coordinate at new x and z coordinate.
-                - save those coordinates to location "locTo"
-                - teleport the player to location "locTo"
-                - add player to cooldown list for cooldown_timer seconds
-                 */
-
                     //Get max and min from config
                     double minRange = main.getConfig().getDouble("minimum_range"); // Minimum blocks the player is teleported away
                     double maxRange = main.getConfig().getDouble("maximum_range"); // Maximum blocks the player is teleported away
@@ -100,6 +89,10 @@ public class BaseCommand implements CommandExecutor {
                     cdMessage = main.getConfig().getString("prefix_msg") + cdMessage;
                     player.sendMessage(ChatColor.translateAlternateColorCodes('&', cdMessage));
                 }
+            }
+            else {
+                // Return permission check fail message
+                player.sendMessage(command.getPermissionMessage());
             }
         }
         else {
