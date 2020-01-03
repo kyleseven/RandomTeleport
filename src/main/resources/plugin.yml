@@ -19,6 +19,9 @@ permissions:
   randomteleport.bypass:
     description: Allows users to bypass the cooldown.
     default: op
+  randomteleport.reload:
+    description: Allows administrators to reload the plugin config.
+    default: op
   randomteleport.*:
     description: Wildcard permission.
     default: op

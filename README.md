@@ -28,7 +28,9 @@ In `config.yml`:
   - `maximum_range` is the maximum blocks to teleport a player.
   
  ## Usage
+ - `/rtp help` shows a list of commands the player can use.
  - `/rtp` teleports a player to a random location within their current world.
+ - `/rtp reload` reloads the config.yml file.
  
  ## Permissions
  - `randomteleport.teleport` allows the usage of the `/rtp` command.

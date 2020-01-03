@@ -114,8 +114,13 @@ public class BaseCommand implements CommandExecutor {
             }
             else {
                 // Show invalid subcommand message
-                String message = main.getConfig().getString("invalid_msg");
-                player.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getConfig().getString("prefix_msg") + message));
+                if (player.hasPermission("randomteleport.reload")) {
+                    String message = main.getConfig().getString("invalid_msg");
+                    player.sendMessage(ChatColor.translateAlternateColorCodes('&', main.getConfig().getString("prefix_msg") + message));
+                }
+                else {
+                    player.sendMessage(command.getPermissionMessage());
+                }
             }
         }
         else {
