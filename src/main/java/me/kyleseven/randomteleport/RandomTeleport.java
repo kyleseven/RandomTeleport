@@ -1,5 +1,6 @@
 package me.kyleseven.randomteleport;
 
+import me.kyleseven.randomteleport.commands.BaseCommand;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.Objects;
