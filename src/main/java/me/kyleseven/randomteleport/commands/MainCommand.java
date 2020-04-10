@@ -7,6 +7,7 @@ import me.kyleseven.randomteleport.Utils;
 import me.kyleseven.randomteleport.config.MainConfig;
 import me.kyleseven.randomteleport.config.MsgConfig;
 import org.bukkit.Location;
+import org.bukkit.block.Block;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -37,51 +38,51 @@ public class MainCommand extends BaseCommand {
     @CommandPermission("randomteleport.teleport")
     @Default
     public void onRandomTeleport(Player player) {
-        Location locFrom = player.getLocation();
+        Location source = player.getLocation();
+        Location destination;
         Random randomGen = new Random();
 
         //If player has passed cooldown check OR has bypass permission
         if (CooldownManager.checkCooldown(player) || player.hasPermission("randomteleport.bypass")) {
 
-            //Get max and min from config
-            double minRange = MainConfig.getInstance().getMinRange(); // Minimum blocks the player is teleported away
-            double maxRange = MainConfig.getInstance().getMaxRange(); // Maximum blocks the player is teleported away
-
-            //Difference in X coordinate the player will be teleported away
-            double diffX = randomGen.nextDouble() * (maxRange - minRange) + minRange;
-            double diffZ = randomGen.nextDouble() * (maxRange - minRange) + minRange;
-
-            //Old X Y Z coordinates
-            double oldX = locFrom.getX(), oldY = locFrom.getY(), oldZ = locFrom.getZ();
-
-            //New X Y Z coordinates
+            Block highestBlockAtDestination;
             double newX, newY, newZ;
+            do {
+                //Get max and min from config
+                double minRange = MainConfig.getInstance().getMinRange(); // Minimum blocks the player is teleported away
+                double maxRange = MainConfig.getInstance().getMaxRange(); // Maximum blocks the player is teleported away
 
-            //Randomly go in positive direction or negative direction
-            if (randomGen.nextBoolean()) {
-                newX = oldX + diffX;
-            } else {
-                newX = oldX - diffX;
-            }
+                //Difference in X coordinate the player will be teleported away
+                double diffX = randomGen.nextDouble() * (maxRange - minRange) + minRange;
+                double diffZ = randomGen.nextDouble() * (maxRange - minRange) + minRange;
 
-            if (randomGen.nextBoolean()) {
-                newZ = oldZ + diffZ;
-            } else {
-                newZ = oldZ - diffZ;
-            }
+                //Old X Z coordinates
+                double oldX = source.getX(), oldZ = source.getZ();
 
-            //Get a safe y coordinate
-            //TODO: Find if player's new coordinate is over lava
-            newY = player.getWorld().getHighestBlockAt((int) newX, (int) newZ).getY();
+                //Randomly go in positive direction or negative direction
+                if (randomGen.nextBoolean()) {
+                    newX = oldX + diffX;
+                } else {
+                    newX = oldX - diffX;
+                }
+
+                if (randomGen.nextBoolean()) {
+                    newZ = oldZ + diffZ;
+                } else {
+                    newZ = oldZ - diffZ;
+                }
+
+                highestBlockAtDestination = player.getWorld().getHighestBlockAt((int) newX, (int) newZ);
+                newY = highestBlockAtDestination.getY();
+            } while (highestBlockAtDestination.isLiquid());
 
             //Save numbers to new coordinate
-            Location locTo = new Location(player.getWorld(), newX, newY, newZ);
-
+            destination = new Location(player.getWorld(), newX, newY, newZ);
             //Teleport player to new coordinate
-            player.teleport(locTo);
+            player.teleport(destination);
 
             //Calculate Distance between coordinate points
-            double distance = Math.abs(locFrom.distance(locTo));
+            double distance = Math.abs(source.distance(destination));
 
             //Send message saying the distance teleported and replace %METERS% with distance.
             Utils.sendPrefixMsg(player, MsgConfig.getInstance().getNotification((int) Math.round(distance)));
