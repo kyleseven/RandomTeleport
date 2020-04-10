@@ -17,7 +17,6 @@ public final class RandomTeleport extends JavaPlugin {
         loadConfigs();
         registerCommands();
         CooldownManager.setupCooldown();
-        this.saveDefaultConfig();
     }
 
     @Override
