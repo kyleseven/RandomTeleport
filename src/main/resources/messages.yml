@@ -1,6 +1,8 @@
 # Game messages for RandomTeleport by PixelArray [BETA]
 # en_US
 
+version: "${project.version}"
+
 # The chat prefix for all RTP messages
 prefix: "&8[&cRTP&8] "
 # The message the player is sent upon teleportation. METERS will be replaced by distance teleported in meters (1 meter = 1 block).
