@@ -1,16 +1,7 @@
 # RandomTeleport by PixelArray [BETA]
 # Players are teleported relative to their current position.
 
-# The chat prefix for all RTP messages
-prefix_msg: "&8[&cRTP&8] "
-# The message the player is sent upon teleportation. METERS will be replaced by distance teleported in meters (1 meter = 1 block).
-notification_msg: "&7You've been teleported METERS blocks away!"
-# The message the player is sent if they're on cooldown. SECONDS will be replaced by seconds left on cooldown.
-cooldown_msg: "&7You must wait SECONDS seconds to teleport again."
-# The message that will be sent on reload.
-reload_msg: "&aConfig reloaded."
-# The message that will be sent if the player enters an invalid subcommand.
-invalid_msg: "&cCommand not recognized. Use /rtp help to see the plugin usage."
+version: "{$project.version}"
 
 # Cooldown (in seconds)
 cooldown_timer: 300
