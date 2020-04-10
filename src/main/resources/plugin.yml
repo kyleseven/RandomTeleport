@@ -4,27 +4,3 @@ main: me.kyleseven.randomteleport.RandomTeleport
 api-version: 1.13
 authors: [kyleseven]
 description: Allows players to teleport to a random location within the world.
-
-commands:
-  randomteleport:
-    description: Teleport to a random location.
-    aliases:
-      - rtp
-    permission: randomteleport.teleport
-
-permissions:
-  randomteleport.teleport:
-    description: Allows use of random teleport plugin.
-    default: op
-  randomteleport.bypass:
-    description: Allows users to bypass the cooldown.
-    default: op
-  randomteleport.reload:
-    description: Allows administrators to reload the plugin config.
-    default: op
-  randomteleport.*:
-    description: Wildcard permission.
-    default: op
-    children:
-      randomteleport.teleport: true
-      randomteleprt.bypass: true
