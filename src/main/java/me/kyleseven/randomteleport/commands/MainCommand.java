@@ -93,4 +93,12 @@ public class MainCommand extends BaseCommand {
             }
         }
     }
+
+    @Subcommand("reload")
+    @Description("Reloads the plugin configs")
+    @CommandPermission("randomteleport.reload")
+    public void onReload(CommandSender sender) {
+        MainConfig.reload();
+        MsgConfig.reload();
+    }
 }
