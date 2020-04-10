@@ -4,7 +4,7 @@ public class MsgConfig extends ConfigLoader {
     private static MsgConfig msgConfig;
 
     public MsgConfig() {
-        super("config.yml");
+        super("messages.yml");
     }
 
     public static MsgConfig getInstance() {
