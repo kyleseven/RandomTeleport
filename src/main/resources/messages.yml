@@ -4,9 +4,9 @@
 # The chat prefix for all RTP messages
 prefix: "&8[&cRTP&8] "
 # The message the player is sent upon teleportation. METERS will be replaced by distance teleported in meters (1 meter = 1 block).
-notification: "&7You've been teleported METERS blocks away!"
+notification: "&7You've been teleported %METERS blocks away!"
 # The message the player is sent if they're on cooldown. SECONDS will be replaced by seconds left on cooldown.
-cooldown: "&7You must wait SECONDS seconds to teleport again."
+cooldown: "&7You must wait %SECONDS seconds to teleport again."
 # The message that will be sent on reload.
 reload: "&aConfig reloaded."
 # The message that will be sent if the player enters an invalid subcommand.
