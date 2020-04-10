@@ -92,6 +92,10 @@ public class MainCommand extends BaseCommand {
                 CooldownManager.setCooldown(player, MainConfig.getInstance().getCooldownTime());
             }
         }
+        else if (!CooldownManager.checkCooldown(player)) {
+            int timeLeft = CooldownManager.getCooldown(player);
+            Utils.sendPrefixMsg(player, MsgConfig.getInstance().getCooldown(timeLeft));
+        }
     }
 
     @Subcommand("reload")
