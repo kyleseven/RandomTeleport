@@ -27,11 +27,11 @@ public class MainConfig extends ConfigLoader {
         return config.getInt("cooldown_timer");
     }
 
-    public int getMinRange() {
-        return config.getInt("minimum_range");
+    public double getMinRange() {
+        return config.getDouble("minimum_range");
     }
 
-    public int getMaxRange() {
-        return config.getInt("maximum_range");
+    public double getMaxRange() {
+        return config.getDouble("maximum_range");
     }
 }
