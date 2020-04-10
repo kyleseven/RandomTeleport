@@ -99,5 +99,6 @@ public class MainCommand extends BaseCommand {
     public void onReload(CommandSender sender) {
         MainConfig.reload();
         MsgConfig.reload();
+        Utils.sendPrefixMsg(sender, MsgConfig.getInstance().getReload());
     }
 }
