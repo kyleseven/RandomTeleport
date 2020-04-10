@@ -12,6 +12,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 @CommandAlias("randomteleport|rtp")
 public class MainCommand extends BaseCommand {
@@ -38,56 +39,32 @@ public class MainCommand extends BaseCommand {
     @CommandPermission("randomteleport.teleport")
     @Default
     public void onRandomTeleport(Player player) {
-        Location source = player.getLocation();
-        Location destination;
-        Random randomGen = new Random();
-
         //If player has passed cooldown check OR has bypass permission
         if (CooldownManager.checkCooldown(player) || player.hasPermission("randomteleport.bypass")) {
+            Location source = player.getLocation();
+            Location destination;
+            int minRange = MainConfig.getInstance().getMinRange();
+            int maxRange = MainConfig.getInstance().getMaxRange();
+            int diffX, diffZ, newX, newZ, newY;
+            Block safeBlock;
 
-            Block highestBlockAtDestination;
-            double newX, newY, newZ;
             do {
-                //Get max and min from config
-                double minRange = MainConfig.getInstance().getMinRange(); // Minimum blocks the player is teleported away
-                double maxRange = MainConfig.getInstance().getMaxRange(); // Maximum blocks the player is teleported away
+                diffX = ThreadLocalRandom.current().nextInt(minRange, maxRange + 1);
+                diffZ = ThreadLocalRandom.current().nextInt(minRange, maxRange + 1);
+                diffX = ThreadLocalRandom.current().nextBoolean() ? diffX * (-1) : diffX;
+                diffZ = ThreadLocalRandom.current().nextBoolean() ? diffZ * (-1) : diffZ;
 
-                //Difference in X coordinate the player will be teleported away
-                double diffX = randomGen.nextDouble() * (maxRange - minRange) + minRange;
-                double diffZ = randomGen.nextDouble() * (maxRange - minRange) + minRange;
+                newX = (int)source.getX() + diffX;
+                newZ = (int)source.getZ() + diffZ;
 
-                //Old X Z coordinates
-                double oldX = source.getX(), oldZ = source.getZ();
+                safeBlock = player.getWorld().getHighestBlockAt(newX, newZ);
+                newY = safeBlock.getY() + 1;
+            } while (safeBlock.isLiquid());
 
-                //Randomly go in positive direction or negative direction
-                if (randomGen.nextBoolean()) {
-                    newX = oldX + diffX;
-                } else {
-                    newX = oldX - diffX;
-                }
-
-                if (randomGen.nextBoolean()) {
-                    newZ = oldZ + diffZ;
-                } else {
-                    newZ = oldZ - diffZ;
-                }
-
-                highestBlockAtDestination = player.getWorld().getHighestBlockAt((int) newX, (int) newZ);
-                newY = highestBlockAtDestination.getY();
-            } while (highestBlockAtDestination.isLiquid());
-
-            //Save numbers to new coordinate
             destination = new Location(player.getWorld(), newX, newY, newZ);
-            //Teleport player to new coordinate
             player.teleport(destination);
+            Utils.sendPrefixMsg(player, MsgConfig.getInstance().getNotification(source.distance(destination)));
 
-            //Calculate Distance between coordinate points
-            double distance = Math.abs(source.distance(destination));
-
-            //Send message saying the distance teleported and replace %METERS% with distance.
-            Utils.sendPrefixMsg(player, MsgConfig.getInstance().getNotification((int) Math.round(distance)));
-
-            //Add them to the cooldown if they don't have the bypass permission
             if (!player.hasPermission("randomteleport.bypass")) {
                 CooldownManager.setCooldown(player, MainConfig.getInstance().getCooldownTime());
             }

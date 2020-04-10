@@ -28,7 +28,7 @@ public class MsgConfig extends ConfigLoader {
     }
 
     public String getNotification(double meters) {
-        return config.getString("notification").replaceAll("%METERS", String.valueOf(meters));
+        return config.getString("notification").replaceAll("%METERS", String.format("%.2f", meters));
     }
 
     public String getCooldown(int seconds) {
