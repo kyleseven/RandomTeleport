@@ -1,6 +1,7 @@
 # Game messages for RandomTeleport by PixelArray [BETA]
 # en_US
 
+# DO NOT CHANGE THIS
 version: "${project.version}"
 
 # The chat prefix for all RTP messages

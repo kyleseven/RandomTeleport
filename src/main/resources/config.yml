@@ -1,6 +1,7 @@
 # RandomTeleport by PixelArray [BETA]
 # Players are teleported relative to their current position.
 
+# DO NOT CHANGE THIS
 version: "{$project.version}"
 
 # Cooldown (in seconds)
