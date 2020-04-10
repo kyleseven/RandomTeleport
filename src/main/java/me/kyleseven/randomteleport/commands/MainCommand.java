@@ -6,7 +6,6 @@ import me.kyleseven.randomteleport.CooldownManager;
 import me.kyleseven.randomteleport.Utils;
 import me.kyleseven.randomteleport.config.MainConfig;
 import me.kyleseven.randomteleport.config.MsgConfig;
-import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
