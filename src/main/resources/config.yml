@@ -8,9 +8,6 @@ version: "{$project.version}"
 cooldown_timer: 300
 
 # The teleport distance is a random value between minimum_range and maximum_range.
-# Default: The player's X and Z coordinates with be changed 25 blocks all the way up to 600 blocks from the original coordinate.
-
-# Pythagorean Theorem can be used to find the minimum and maximum distance the player will be teleported.
-# Default: The player will be teleported minimum ~35.5 blocks away and maximum ~848.5 blocks away (On a 2D coordinate plane)
+# Default: The player's X and Z coordinates with be changed 25 to 600 blocks away from their original coordinate.
 minimum_range: 25
 maximum_range: 600
