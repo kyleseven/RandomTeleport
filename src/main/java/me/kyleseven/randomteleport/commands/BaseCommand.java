@@ -7,7 +7,6 @@ import org.bukkit.command.CommandSender;
 
 public class BaseCommand implements CommandExecutor {
 
-    private RandomTeleport main;
     // Subcommand Definitions
     private SubcommandTP subTP;
     private SubcommandReload subReload;
@@ -15,7 +14,6 @@ public class BaseCommand implements CommandExecutor {
     private SubcommandInvalid subInvalid;
 
     BaseCommand(RandomTeleport main) {
-        this.main = main;
         this.subTP = new SubcommandTP(main);
         this.subReload = new SubcommandReload(main);
         this.subHelp = new SubcommandHelp(main);
