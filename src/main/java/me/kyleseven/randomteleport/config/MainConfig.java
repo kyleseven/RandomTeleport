@@ -15,8 +15,7 @@ public class MainConfig extends ConfigLoader {
     }
 
     public static void reload() {
-        mainConfig = null;
-        getInstance();
+        getInstance().loadFile();
     }
 
     /*

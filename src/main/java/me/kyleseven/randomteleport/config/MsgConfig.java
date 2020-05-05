@@ -15,8 +15,7 @@ public class MsgConfig extends ConfigLoader {
     }
 
     public static void reload() {
-        msgConfig = null;
-        getInstance();
+        getInstance().loadFile();
     }
 
     /*
